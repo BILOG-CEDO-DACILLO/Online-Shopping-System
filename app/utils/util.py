@@ -3,7 +3,24 @@ from pathlib import Path
 from PyQt5 import QtWidgets, uic,QtCore
 from PyQt5.QtCore import QObject, QEvent, Qt
 from PyQt5.QtGui import QFont, QFontDatabase, QColor
-from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QLineEdit, QPushButton
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QLineEdit, QPushButton, QComboBox
+
+
+class setupComboBox:
+    def __init__(self, combobox: QComboBox, item_list: list, placeholder: str):
+        self.combobox = combobox
+        self.placeholder_text = placeholder
+        self.combobox.clear()
+        self.combobox.addItem(self.placeholder_text)
+        self.combobox.addItems(item_list)
+        self.combobox.setCurrentIndex(0)
+
+    def get_selected_value(self) -> str:
+        if self.combobox.currentIndex() == 0:
+            return None
+        return self.combobox.currentText()
+
+
 
 
 class MyWindow(QtWidgets.QDialog):
@@ -40,7 +57,7 @@ class MyWindow(QtWidgets.QDialog):
         self._drag_pos = None
 
 class HoverShadow(QObject):
-    def __init__(self, lineedit: QLineEdit, blur=15, offset_x=0, offset_y=0, color=QColor(0, 0, 0, 160)):
+    def __init__(self, lineedit: QLineEdit, blur=25, offset_x=0, offset_y=0, color=QColor(0, 0, 0, 160)):
         super().__init__(lineedit)
         self.lineedit = lineedit
 

@@ -1,25 +1,31 @@
 from PyQt5.QtWidgets import QApplication
 
-# Import the window classes
 from app.gui.login_window import LogandSign
-from app.utils.util import MyWindow
+from app.gui.Fillup import FillupWindow
 
 
-# --- 5. Application Manager (Handles Window Switching) ---
 class ApplicationManager(QApplication):
-    """
-    Manages the lifecycle and switching between QMainWindow and QDialog screens.
-    """
     def __init__(self, argv):
         super().__init__(argv)
-        # Initialize all windows, passing a reference to the manager
+
+        # Create windows first
         self.logandsign = LogandSign()
+        self.fillup = FillupWindow()
 
+        # Inject manager reference
+        self.logandsign.app_manager = self
+        self.fillup.app_manager = self
 
-        # Keep track of the currently active main window
         self.current_main_window = None
 
     def start(self):
-        """Starts the application by showing the login screen."""
-        self.logandsign.show()
+        self._show_main_window(self.logandsign)
 
+    def _show_main_window(self, new_window):
+        if self.current_main_window:
+            self.current_main_window.hide()
+        self.current_main_window = new_window
+        new_window.show()
+
+    def show_fillup(self):
+        self._show_main_window(self.fillup)
