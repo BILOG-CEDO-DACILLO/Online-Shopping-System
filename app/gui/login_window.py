@@ -43,6 +43,7 @@ class LogandSign(MyWindow):
         #-------------------------------------------- This setups the UI ----------------
 
         #-------------------------------------------- This setups the UI -------------------
+
     def setup_ui(self):
         uic.loadUi(self.ui_path, self)
         self.database = Database()
@@ -184,6 +185,7 @@ class LogandSign(MyWindow):
             QMessageBox.warning(self, "Error", f"Failed to log in, wrong username or password. Maybe account does not exist?", QMessageBox.Ok)
         else:
             QMessageBox.information(self, "Success", "Login successful!", QMessageBox.Ok)
+            self.app_manager.show_mainwindow()
 
         #-------------------------------------------- Open the signup dialog via the manager ----------
     def show_fillup(self):

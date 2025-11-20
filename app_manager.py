@@ -2,6 +2,7 @@ from PyQt5.QtWidgets import QApplication
 
 from app.gui.login_window import LogandSign
 from app.gui.Fillup import FillupWindow
+from app.gui.MainWindow import MainWindow
 
 
 class ApplicationManager(QApplication):
@@ -10,9 +11,11 @@ class ApplicationManager(QApplication):
 
         self.logandsign = LogandSign()
         self.fillup = FillupWindow()
+        self.mainwindow = MainWindow()
 
         self.logandsign.app_manager = self
         self.fillup.app_manager = self
+        self.mainwindow.app_manager = self
 
         self.current_main_window = None
 
@@ -25,8 +28,17 @@ class ApplicationManager(QApplication):
         self.current_main_window = new_window
         new_window.show()
 
+    def _show_main_windowMAX(self, new_window):
+        if self.current_main_window:
+            self.current_main_window.hide()
+        self.current_main_window = new_window
+        new_window.showMaximized()
+
     def show_fillup(self):
         self._show_main_window(self.fillup)
 
     def show_login(self):
         self._show_main_window(self.logandsign)
+
+    def show_mainwindow(self):
+        self._show_main_windowMAX(self.mainwindow)

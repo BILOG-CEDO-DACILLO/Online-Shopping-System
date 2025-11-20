@@ -1,5 +1,16 @@
 <RCC>
   <qresource prefix="images">
+    <file>lll.png</file>
+    <file>educ.png</file>
+    <file>dost.png</file>
+    <file>acad.png</file>
+    <file>bcd.png</file>
+    <file>bsu.png</file>
+    <file>altlogo.png</file>
+    <file>search.png</file>
+    <file>topbar.png</file>
+    <file>left-arrow.png</file>
+    <file>menu.png</file>
     <file>profilephoto.png</file>
     <file>main_bg.png</file>
     <file>Screenshot 2025-11-16 184411.png</file>

@@ -6,8 +6,7 @@ from PyQt5.QtGui import (QFont, QFontDatabase, QColor, QIcon)
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QMessageBox
 import sqlite3
 from app.assets import res_rc
-from app.database.DBloginsignup import Database, database
-from app.utils.util import (MyWindow, HoverShadow, load_font)
+from app.utils.util import (MyWindow, HoverShadow, load_font, DesignShadow)
 
 class MainWindow(QtWidgets.QMainWindow):
     def __init__(self, app_manager=None):
@@ -15,6 +14,8 @@ class MainWindow(QtWidgets.QMainWindow):
         self.app_manager = app_manager
         self.setup_paths_and_icons()
         self.setup_ui()
+        self.setup_fonts()
+        self.setup_shadows()
 
 
         #-------------------------------------------- This setups the paths ----------------
@@ -36,6 +37,36 @@ class MainWindow(QtWidgets.QMainWindow):
         # -------------------------------------------- This setups the UI ----------------
     def setup_ui(self):
         uic.loadUi(self.ui_path, self)
+        self.sidebar.setHidden(True)
+
+########################################## STYLE AREA ###############################################
+
+        #-------------------------------------------- This setups the stylized fonts ----------------
+    def setup_fonts(self):
+
+        self.largelabel_font = load_font(self.isb_font_path, 36, bold=True)
+        self.mediumlabel_font = load_font(self.isb_font_path, 14, bold=True)
+        self.field_font = load_font(self.isr_font_path, 10, bold=False)
+
+        font_map = {
+            self.largelabel_font: [self.welcome_lbl],
+            self.mediumlabel_font: [self.applybtn, self.applybtn2, self.applybtn3, self.applybtn4, self.applybtn5,
+                                    self.applybtn6, self.financialLabel, self.bcdLabel, self.educLabel, self.lll_2,
+                                    self.acad_2, self.dost_2],
+            self.field_font: [self.financialLabel2, self.financialLabel3, self.bcdLabel2, self.bcdLabel3, self.educLabel2,
+                              self.educLabel3, self.lll2, self.lll3, self.acad2, self.acad3, self.dost2, self.dost3],
+        }
+        for font, widgets in font_map.items():
+            for widget in widgets:
+                widget.setFont(font)
+
+        # -------------------------------------------- This setups the hover shadows ----------------
+    def setup_shadows(self):
+        widgets_to_shadow = [
+            self.financial_assistance, self.bcd_scholarship, self.lll, self.acad, self.educ_assistance, self.dost
+        ]
+        for widget in widgets_to_shadow:
+            DesignShadow(widget)
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)

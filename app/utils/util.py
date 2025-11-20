@@ -136,6 +136,19 @@ class MyWindow(QtWidgets.QDialog):
     def mouseReleaseEvent(self, event):
         self._drag_pos = None
 
+class DesignShadow:
+    def __init__(self, widget, blur=50, offset=(0, 20), color=QColor(0, 0, 0, 180)):
+        # QGraphicsDropShadowEffect requires the parent or widget for context
+        shadow = QGraphicsDropShadowEffect(widget)
+
+        # Set the permanent shadow properties
+        shadow.setBlurRadius(blur)
+        shadow.setOffset(*offset)
+        shadow.setColor(color)
+
+        # Apply the permanent effect
+        widget.setGraphicsEffect(shadow)
+
 class HoverShadow(QObject):
     def __init__(self, lineedit: QLineEdit, blur=25, offset_x=0, offset_y=0, color=QColor(0, 0, 0, 160)):
         super().__init__(lineedit)

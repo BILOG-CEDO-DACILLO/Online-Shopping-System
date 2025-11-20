@@ -82,16 +82,17 @@ class FillupWindow(MyWindow):
     def Set_up_comboBox(self):
         self.civilstatuses = ["Single", "Married", "Divorced/Annulled", "Widowed"]
         self.genders = ["Male", "Female", "Other"]
-        self.colleges = ["CICS", "BSN", "CAS", "CABEIHM", "CJE"]
+        self.colleges = ["CICS", "CTE", "CHS", "CAS", "CABEIHM", "CCJE"]
         self.years = ["1st - Year", "2nd - Year", "3rd - Year", "4th - Year"]
         self.municipalities = ["Balayan", "Calaca", "Calatagan", "Lemery", "Nasugbu", "Tuy"]
 
         self.program_data = {
-            "CICS": ["BSIT", "COMENG", "COMSCI"],
-            "BSN": ["NURSING", "CRIM", "MASSCOM"],
-            "CAS": ["PSYCH", "SOCIOLOGY"],
-            "CABEIHM": ["BSED", "BEED"],
-            "CJE": ["LAW", "POLSCI"]
+            "CICS": ["BSIT"],
+            "CAS": ["BA Comm", "BSFT", "BSP", "BSFAS", "BSCrim"],
+            "CABEIHM": ["BSA", "BSMA", "BSBA - FM", "BSBA - MM", "BSBA - HRM", "BSHM", "BSTM"],
+            "CCJE": ["LAW", "POLSCI"],
+            "CTE": ["BEED", "BSEd - English", "BSEd - Math", "BSEd - Sciences", "BSEd - Filipino", "BSEd - Social Studies", "BPEd"],
+            "CHS": ["BSN", "BSND"]
         }
 
         self.civil_status_setup = setupComboBox(self.civilstatus, self.civilstatuses, "Civil Status")
